@@ -69,6 +69,24 @@ grafanaDashboard:
   annotations:
     k8s-sidecar-target-directory: "/tmp/dashboards/Environment"
 
+prometheusRule:
+  enabled: false
+  labels:
+    role: alert-rules
+  annotations: {}
+  thresholds:
+    co2Warning: 1000
+    co2Critical: 1400
+    pm25Warning: 35
+    pm25Critical: 55
+    pm10Warning: 50
+    tempHigh: 28
+    tempLow: 17
+    humidityLow: 25
+    humidityHigh: 70
+    batteryLow: 20
+    batteryCritical: 10
+
 
 livenessProbe:
   httpGet:
