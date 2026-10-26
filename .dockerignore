@@ -1,0 +1,8 @@
+target/
+.git/
+.forgejo/
+tests/
+helm/
+Dockerfile*
+.dockerignore
+.env

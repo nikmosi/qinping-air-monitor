@@ -1,0 +1,6 @@
+apiVersion: v2
+name: qinping-air-monitor
+description: Prometheus metrics exporter for Qingping Air Monitor Lite
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
