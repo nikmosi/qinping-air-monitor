@@ -1,0 +1,18 @@
+{{- if .Values.grafanaDashboard.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "qinping-air-monitor.fullname" . }}-dashboard
+  labels:
+    {{- include "qinping-air-monitor.labels" . | nindent 4 }}
+    {{- with .Values.grafanaDashboard.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- with .Values.grafanaDashboard.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+data:
+  qingping-air-monitor.json: |-
+{{ .Files.Get "dashboards/qingping-air-monitor.json" | indent 4 }}
+{{- end }}

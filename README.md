@@ -83,16 +83,24 @@ helm install qinping-air-monitor helm/ \
   --set existingSecret=qingping-creds
 ```
 
-### Prometheus Operator ServiceMonitor
+### Prometheus Operator ServiceMonitor & Grafana Dashboard
 
-The chart automatically creates a `ServiceMonitor` by default:
+The chart automatically creates a `ServiceMonitor` and imports the Grafana dashboard for `kube-prometheus-stack`:
 
 ```yaml
 serviceMonitor:
   enabled: true
   interval: "30s"
   scrapeTimeout: "10s"
+
+grafanaDashboard:
+  enabled: true
+  labels:
+    grafana_dashboard: "1"
 ```
+
+The dashboard will be automatically discovered by the `kube-prometheus-stack` Grafana sidecar and imported into the **Environment** folder.
+
 
 ---
 

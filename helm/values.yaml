@@ -60,6 +60,14 @@ serviceMonitor:
   labels: {}
   annotations: {}
 
+grafanaDashboard:
+  enabled: true
+  labels:
+    grafana_dashboard: "1"
+  annotations:
+    k8s-sidecar-target-directory: "/tmp/dashboards/Environment"
+
+
 livenessProbe:
   httpGet:
     path: /healthz
