@@ -54,6 +54,9 @@ pub async fn healthz_handler() -> impl IntoResponse {
 
 pub async fn metrics_handler(State(state): State<AppState>) -> Response {
     let result = state.client.fetch_devices().await;
+    if let Err(ref e) = result {
+        tracing::error!("Failed to scrape Qingping devices: {}", e);
+    }
     let text = metrics::render_prometheus_metrics(&result);
 
     Response::builder()

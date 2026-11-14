@@ -230,7 +230,10 @@ impl QingpingClient {
             .header(AUTHORIZATION, format!("Bearer {}", token))
             .send()
             .await
-            .map_err(|e| format!("Device request failed: {}", e))?;
+            .map_err(|e| {
+                error!("Device request failed: {}", e);
+                format!("Device request failed: {}", e)
+            })?;
 
         if !resp.status().is_success() {
             let status = resp.status();
@@ -242,7 +245,10 @@ impl QingpingClient {
         let data: QingpingDevicesResponse = resp
             .json()
             .await
-            .map_err(|e| format!("Failed to parse devices response: {}", e))?;
+            .map_err(|e| {
+                error!("Failed to parse devices response: {}", e);
+                format!("Failed to parse devices response: {}", e)
+            })?;
 
         // Update TTL cache
         {
